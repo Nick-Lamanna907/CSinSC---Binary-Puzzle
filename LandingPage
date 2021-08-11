@@ -1,0 +1,24 @@
+from ._anvil_designer import LandingPageTemplate
+from anvil import *
+import anvil.tables as tables
+import anvil.tables.query as q
+from anvil.tables import app_tables
+
+class LandingPage(LandingPageTemplate):
+  def __init__(self, **properties):
+    # Set Form properties and Data Bindings.
+    self.init_components(**properties)
+
+    # Any code you write here will run when the form opens.
+
+  def btnSmile_click(self, **event_args):
+    rows = [18, 18, 0, 33, 18, 12]
+    open_form('PuzzlePage', rows = rows)
+
+  def button_2_click(self, **event_args):
+    rows = [0, 18, 45, 33, 18, 12]
+    open_form('PuzzlePage', rows = rows)
+
+  def button_3_click(self, **event_args):
+    rows = [63, 32, 46, 42, 34, 62]
+    open_form('PuzzlePage', rows = rows)
