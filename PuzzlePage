@@ -1,0 +1,44 @@
+from ._anvil_designer import PuzzlePageTemplate
+from anvil import *
+import anvil.tables as tables
+import anvil.tables.query as q
+from anvil.tables import app_tables
+
+class PuzzlePage(PuzzlePageTemplate):
+  def __init__(self, **properties):
+    # Set Form properties and Data Bindings.
+    self.init_components(**properties)
+
+    # Any code you write here will run when the form opens.
+    global rows
+    rows = properties['rows']
+    self.lbl1.text = rows[0]
+    self.lbl2.text = rows[1]
+    self.lbl3.text = rows[2]
+    self.lbl4.text = rows[3]
+    self.lbl5.text = rows[4]
+    self.lbl6.text = rows[5]
+    
+  def buttonClick(self, **event_args):    
+    if event_args['sender'].background == 'black':
+      event_args['sender'].background = 'white'
+      event_args['sender'].foreground = 'black'
+      event_args['sender'].text = '1'
+    else:
+      event_args['sender'].background = 'black'
+      event_args['sender'].foreground = 'white'
+      event_args['sender'].text = '0'
+
+  def button_1_click(self, **event_args):
+    open_form('LandingPage')
+
+  def button_2_click(self, **event_args):
+    if rows == [18, 18, 0, 33, 18, 12]:
+      self.imgAns.source = app_tables.answers.get(name='smile')['photo']
+    elif rows == [0, 18, 45, 33, 18, 12]:
+      self.imgAns.source = app_tables.answers.get(name='heart')['photo']
+    elif rows == [63, 32, 46, 42, 34, 62]:
+      self.imgAns.source = app_tables.answers.get(name='swirl')['photo']
+      
+  def button_3_click(self, **event_args):
+    alert("Convert the decimal numbers on the left of the grid to binary. For each 1 in the binary number, click the corresponding grid tile to turn it white. When you're done, check your answer!")
